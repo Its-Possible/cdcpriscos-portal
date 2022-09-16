@@ -23,7 +23,8 @@ window.Vue = require('vue').default;
 Vue.component('slider-component', require('./components/SliderComponent.vue').default);
 Vue.component('calendar-component', require('./components/CalendarComponent.vue').default);
 Vue.component('last-news-component', require('./components/LastNewsComponent.vue').default);
-Vue.component('last-results-component', require('./components/LastResultsComponent').default)
+Vue.component('last-results-component', require('./components/LastResultsComponent').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

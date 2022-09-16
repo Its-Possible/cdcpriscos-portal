@@ -37,7 +37,7 @@
                 </div>
                 <div class="weekdays-numb">
                     <div v-for="day in monthdays.prev" :key="`weekday-last-month-${day}`" class="weekday-numb weekday-month-prev">{{ day }}</div>
-                    <div v-for="day in monthdays.current" :key="`weekday-${day}`" :class="{ 'weekday-numb' : true, 'today': day === current_day.getDate() }">{{ day }}</div>
+                    <div v-for="day in monthdays.current" @click="handleSelectDay(day)" :key="`weekday-${day}`" :class="{ 'weekday-numb' : true, 'today': day === current_day.getDate(), 'selected': day_selected.date === day }">{{ day }}</div>
                     <div v-for="day in monthdays.next" :key="`weekday-next-${day}`" class="weekday-numb weekday-month-next">{{ day }}</div>
                 </div>
             </section>
@@ -47,42 +47,13 @@
             <hr/>
             <section class="events">
                 <div class="row mt-3">
-                    <small>{{ weekdays[current_day.getDay()-1] }}, {{ current_day.getDate() }} de {{ months[current_day.getMonth()] }} de {{ current_day.getFullYear() }}</small>
+                    <small v-if="day_selected.date === 0">{{ weekdays[current_day.getDay()-1] }}, {{ current_day.getDate() }} de {{ months[current_day.getMonth()] }} de {{ current_day.getFullYear() }}</small>
+                    <small v-else>{{ day_selected.day }}, {{ day_selected.date }} de {{ day_selected.month }} de {{ day_selected.year }}</small>
                     <ul class="events-list py-3">
-                        <li>
+                        <li v-for="event in events">
                             <a href="#">
-                                <h3>CDC Priscos - SC Braga</h3>
-                                <p>18:00h - Bilhetes já há venda nos locais habituais</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <h3>SL Benfica - CDC Priscos</h3>
-                                <p>21:30h - Bilhetes já há venda nos locais habituais</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <h3>CDC Priscos - SC Braga</h3>
-                                <p>18:00h - Bilhetes já há venda nos locais habituais</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <h3>SL Benfica - CDC Priscos</h3>
-                                <p>21:30h - Bilhetes já há venda nos locais habituais</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <h3>CDC Priscos - SC Braga</h3>
-                                <p>18:00h - Bilhetes já há venda nos locais habituais</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <h3>SL Benfica - CDC Priscos</h3>
-                                <p>21:30h - Bilhetes já há venda nos locais habituais</p>
+                                <h3>{{ event.title }}</h3>
+                                <p>{{ event.datetime }} <strong>|</strong> {{ event.description }}</p>
                             </a>
                         </li>
                     </ul>
@@ -106,7 +77,17 @@
                     current: [],
                     next: []
                 },
-                weekday: null
+                events: [{
+                    title: 'Evento 1',
+                    datetime: '22:00',
+                    description: 'Descrição do evento 1'
+                }],
+                weekday: null,
+                day_selected: {
+                    day: null,
+                    date: 0,
+                    month: 0
+                }
             }
         },
         created () {
@@ -157,10 +138,26 @@
 
         },
         methods: {
-            isToday: (date) => {
+            isToday: function (date) {
                 let current_date = new Date();
                 return current_date === date;
+            },
+            handleSelectDay: function (day) {
+                let date = new Date(this.current_day.getFullYear(), this.current_day.getMonth(), day);
+                this.day_selected = {
+                    day: this.weekdays[date.getDay()-1 === -1 ? 6 : date.getDay()-1],
+                    date: day,
+                    month: this.months[date.getMonth()],
+                    year: date.getFullYear()
+                }
 
+                console.log();
+
+                this.events = [{
+                    title: 'Evento 2',
+                    datetime: '20:30',
+                    description: 'Descrição do evento 2'
+                }];
             }
         }
     }

@@ -19,7 +19,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Bcrypt Option
+    | Bcrypt Options
     |--------------------------------------------------------------------------
     |
     | Here you may specify the configuration options that should be used when
@@ -34,7 +34,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Argon Option
+    | Argon Options
     |--------------------------------------------------------------------------
     |
     | Here you may specify the configuration options that should be used when

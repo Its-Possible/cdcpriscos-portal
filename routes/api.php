@@ -18,6 +18,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/page/{page}', [\App\Http\Controllers\Api\PageApiController::class, 'show']);
-Route::get('/slides', [\App\Http\Controllers\Api\SlideApiController::class, 'index']);
-Route::get('/posts', [\App\Http\Controllers\Api\PostApiController::class, 'index']);
+Route::get('/page/{page}', [\App\Http\Controllers\Api\PageApiController::class, 'index'])->name('cdcapi.page.index');
+Route::get('/slides', [\App\Http\Controllers\Api\SlideApiController::class, 'index'])->name('cdcapi.slides.index');
+Route::get('/posts', [\App\Http\Controllers\Api\PostApiController::class, 'index'])->name('cdcapi.posts.index');

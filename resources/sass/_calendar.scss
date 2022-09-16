@@ -35,6 +35,10 @@
                 color: #fff;
                 background: rgba(44, 62, 80, .55);
             }
+            &.selected {
+                color: #fff;
+                background: rgba(44, 62, 80, .95);
+            }
         }
     }
     section.events {

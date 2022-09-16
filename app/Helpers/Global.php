@@ -7,13 +7,13 @@ use App\Models\Option;
  * @param $default
  * @return mixed|null
  */
-function SITE_OPTION($variable, $default = null) : ?string
+function SITE_OPTION($variable, $default = null): ?string
 {
     $option = Option::where('variable', $variable)->first();
 
-    if($option != null){
+    if ($option != null) {
         return $option->value;
-    }else{
+    } else {
         return $default == null ? null : $default;
     }
 }
@@ -27,7 +27,8 @@ function SITE_OPTION($variable, $default = null) : ?string
  * @param $value
  * @return mixed
  */
-function SITE_ADD_OPTION($name, $description, $variable, $value) {
+function SITE_ADD_OPTION($name, $description, $variable, $value)
+{
     $option = Option::firstOrCreate(
         ['name' => $name],
         ['description' => $description],
