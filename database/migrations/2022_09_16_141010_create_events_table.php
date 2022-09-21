@@ -13,11 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('social', function (Blueprint $table) {
+        Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->string('name')->default('Facebook');
-            $table->string('social_id');
+            $table->foreignId('user_id')->constrained();
+            $table->string('title');
+            $table->string('description');
+            $table->string('location');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -28,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('social');
+        Schema::dropIfExists('events');
     }
 };

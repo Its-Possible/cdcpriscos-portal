@@ -4,10 +4,10 @@
 
     <main class="main">
         <!-- SLIDER -->
-        @if(SITE_OPTION(\App\Helpers\Constants\OptionInterface::OPTION_SLIDER_HOMEPAGE_STATUS_VARIABLE) === \App\Helpers\Constants\OptionInterface::OPTION_SLIDER_HOMEPAGE_STATUS_VALUE_ENABLED and isset($slides))
+        @if(SITE_OPTION(\App\Helpers\Constants\OptionInterface::OPTION_SLIDER_HOMEPAGE_STATUS_VARIABLE) === \App\Helpers\Constants\OptionInterface::OPTION_SLIDER_HOMEPAGE_STATUS_VALUE_ENABLED and $slidesCounter > 0)
             <section class="slider" id="slider">
                 <slider-component data="{{ $slides }}"></slider-component>
-            </section><
+            </section>
         @endif
         <!-- SLIDER -->
 

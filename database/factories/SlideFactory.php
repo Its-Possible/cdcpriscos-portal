@@ -19,7 +19,8 @@ class SlideFactory extends Factory
     {
         return [
             //
-            'name' => $this->faker->name,
+            'user_id' => 1,
+            'title' => $this->faker->name,
             'description' => $this->faker->text,
             'cover' => $this->faker->imageUrl,
             'caption' => $this->faker->text,

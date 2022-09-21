@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\View;
 
 use App\Http\Controllers\Controller;
+use App\Models\Slide;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -15,24 +16,25 @@ class PageViewController extends Controller
     {
         //
         $slides = Http::timeout(60)->get(url('/api/slides'));
-
         $slides->throw();
+
+        $slides_counter = Slide::count();
 
         $lastnews = Http::get(url('/api/posts'));
 
         return view('home')
             ->withSlides($slides->body())
+            ->withSlidesCounter($slides_counter)
             ->withLastnews($lastnews->body());
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Display a login page
      */
-    public function create()
+    public function signIn()
     {
         //
+        return view('auth.sign-in');
     }
 
     /**
@@ -41,53 +43,21 @@ class PageViewController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function login(Request $request)
     {
         //
-    }
+        $auth = Http::timeout(60)->post(route('cdcapi.auth.sign-in'), [
+            'csrf_token' => csrf_token(),
+            'email' => $request->email,
+            'password' => $request->password
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        $auth->throw();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return response()->json([
+            'success' => true,
+            'message' => 'Login successful',
+            'data' => []
+        ]);
     }
 }

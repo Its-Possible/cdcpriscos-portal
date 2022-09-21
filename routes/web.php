@@ -14,4 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [\App\Http\Controllers\View\PageViewController::class, 'home'])->name('cdc.index');
-Route::get('/', [\App\Http\Controllers\View\PageViewController::class, 'home'])->name('cdc.home');
+Route::get('/home', [\App\Http\Controllers\View\PageViewController::class, 'home'])->name('cdc.home');
+Route::get('/auth/sign-in', [\App\Http\Controllers\View\PageViewController::class, 'signIn'])->name('cdc.sign-in');
+Route::post('/auth/login', [\App\Http\Controllers\View\PageViewController::class, 'login'])->name('cdc.login');
