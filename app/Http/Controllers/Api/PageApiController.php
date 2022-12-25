@@ -15,6 +15,13 @@ class PageApiController extends Controller
     public function index()
     {
         //
+
+        if(1 == 1){
+            
+        }
+
+        switch()
+
     }
 
     /**
